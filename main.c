@@ -6,6 +6,7 @@ int main() {
     AddressBook addressBook;
     int sortChoice=0;
     initialize(&addressBook); // Initialize the address book
+    loadContactsFromFile(&addressBook);
 
     do {
         printf("\nAddress Book Menu:\n");
