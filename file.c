@@ -3,7 +3,7 @@
 
 void saveContactsToFile(AddressBook *addressBook) 
 {
- FILEfile = fopen("contacts.csv","w");
+ FILE *file = fopen("contacts.csv","w");
     if(file==NULL)
     {
         printf("Error: Unable to open file for saving\n");
@@ -22,7 +22,7 @@ void saveContactsToFile(AddressBook *addressBook)
 
 void loadContactsFromFile(AddressBook *addressBook) 
 {
-    FILEfile = fopen("contacts.csv", "r");
+    FILE *file = fopen("contacts.csv", "r");
 
     if(file == NULL)
     {
