@@ -4,6 +4,7 @@
 int main() {
     int choice;
     AddressBook addressBook;
+    int sortChoice=0;
     initialize(&addressBook); // Initialize the address book
 
     do {
@@ -36,7 +37,7 @@ int main() {
                 break;
             case 6:
                 printf("Saving...\n");
-                //saveContactsToFile(&addressBook);
+                saveContactsToFile(&addressBook);
                 break;   
             case 7:
                 printf("Exiting...\n");
