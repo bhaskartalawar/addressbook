@@ -426,7 +426,9 @@ void editContact(AddressBook *addressBook)
 					return;
 				}
 			}
-		} else if(editChoice == 3) {
+		} 
+	}
+		else if(editChoice == 3) {
 			while(1) {
 				char tempEmail[50];
 				printf("Enter the new Email: ");

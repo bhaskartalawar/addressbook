@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "contact.h"
+#include "file.h"
 
 int main() {
     int choice;
