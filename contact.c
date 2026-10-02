@@ -160,72 +160,80 @@ void createContact(AddressBook *addressBook)
 		}
 	}
 
-	while(1) {
-		present = 0;
-		flag = 1;
-		char ch[5] = ".com";
+	while (1) {
+    present = 0;
+    flag = 1;
+    char ch[5] = ".com";
 
-		printf("Enter the email id: ");
-		scanf("%s", addressBook->contacts[i].email);
+    printf("Enter the email id: ");
+    scanf("%s", addressBook->contacts[i].email);
 
-		int n = strlen(addressBook->contacts[i].email);
-		int at = 0, atIdx = -1;
+    int n = strlen(addressBook->contacts[i].email);
+    int at = 0, atIdx = -1, dot = 0;
 
-		if (!isalnum(addressBook->contacts[i].email[0])) {
-			flag = 0;
-		}
+    if (!isalnum(addressBook->contacts[i].email[0])) {
+        flag = 0;
+    }
 
-		if (flag == 1) {
-			for(int j = 0; j < n; j++) {
-				if (isupper(addressBook->contacts[i].email[j])) {
-					flag = 0;
-					break;
-				}
-				if (addressBook->contacts[i].email[j] == '@') {
-					at++;
-					atIdx = j;
-				}
-			}
-		}
+    if (flag == 1) {
+        for (int j = 0; j < n; j++) {
+            if (addressBook->contacts[i].email[j] == '.') {
+                dot++;
+            }
+            if (isupper(addressBook->contacts[i].email[j])) {
+                flag = 0;
+                break;
+            }
+            if (addressBook->contacts[i].email[j] == '@') {
+                at++;
+                atIdx = j;
+            }
+        }
+    }
 
-		if (flag == 1 && at == 1 && n >= 5) {
-			for(int k = 0; k < 4; k++) {
-				if(addressBook->contacts[i].email[n - 4 + k] != ch[k]) {
-					flag = 0;
-					break;
-				}
-			}
-		} else {
-			flag = 0;
-		}
-
-		if (flag == 1) {
-			if ((n - 4) - (atIdx + 1) < 1) {
-				flag = 0;
-			}
-		}
-
-		if(flag == 0) {
-			printf("Invalid email id\n");
-		}
+    if (flag == 1 && at == 1 && dot == 1 && n >= 6) {
+        if (atIdx > 0 && !isalnum(addressBook->contacts[i].email[atIdx - 1])) {
+            flag = 0;
+        } 
 		else {
-			if(i >= 1) {
-				for(int j = 0; j < i; j++) {
-					if(strcmp(addressBook->contacts[j].email, addressBook->contacts[i].email) == 0) {
-						present = 1;
-						break;
-					}
-				}
-			}
+            for (int k = 0; k < 4; k++) {
+                if (addressBook->contacts[i].email[n - 4 + k] != ch[k]) {
+                    flag = 0;
+                    break;
+                }
+            }
+        }
+    } 
+	else {
+        flag = 0;
+    }
 
-			if(present == 1) {
-				printf("Email already present\n");
-			}
-			else {
-				break;
-			}
-		}
-	}
+    if (flag == 1) {
+        if ((n - 4) - (atIdx + 1) < 1) {
+            flag = 0;
+        }
+    }
+
+    if (flag == 0) {
+        printf("Invalid email id\n");
+    } 
+	else {
+        if (i >= 1) {
+            for (int j = 0; j < i; j++) {
+                if (strcmp(addressBook->contacts[j].email, addressBook->contacts[i].email) == 0) {
+                    present = 1;
+                    break;
+                }
+            }
+        }
+
+        if (present == 1) {
+            printf("Email already present\n");
+        } else {
+            break;
+        }
+    }
+}
 
 	(addressBook->contactCount)++;
 	printf("Contact created successfully!\n");
