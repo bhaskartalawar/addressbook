@@ -441,7 +441,7 @@ void editContact(AddressBook *addressBook)
 				char tempEmail[50];
 				printf("Enter the new Email: ");
 				scanf("%s", tempEmail);
-				int n = strlen(tempEmail), flag = 1, at = 0, atIdx = -1, present = 0;
+				int n = strlen(tempEmail), flag = 1, at = 0, atIdx = -1, present = 0,dot=0;
 				char ch[5] = ".com";
 
 				if(!isalnum(tempEmail[0])){ 
@@ -450,6 +450,9 @@ void editContact(AddressBook *addressBook)
 
 				if(flag == 1) {
 					for(int j = 0; j < n; j++) {
+						if(tempEmail[j] == '.'){
+							dot++;
+						}
 						if(isupper(tempEmail[j])) { 
 						    flag = 0; 
 						    break; 
@@ -463,7 +466,11 @@ void editContact(AddressBook *addressBook)
 					}
 				}
 
-				if(flag == 1 && at == 1 && n >= 5) {
+				if(flag == 1 && at == 1 && dot==1 && n >= 5) {
+					if(atIdx>0 && !isalnum(tempEmail[atIdx-1])){
+						flag=0;
+					}
+					else{
 					for(int k = 0; k < 4; k++) {
 						if(tempEmail[n - 4 + k] != ch[k]) { 
 						    flag = 0; 
@@ -472,6 +479,7 @@ void editContact(AddressBook *addressBook)
 						}
 					}
 				} 
+			}
 				else { 
 				    flag = 0; 
 				    
