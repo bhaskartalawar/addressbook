@@ -405,7 +405,8 @@ void editContact(AddressBook *addressBook)
 				int n = strlen(tempPhone), flag = 0, present = 0;
 				if(n != 10 || tempPhone[0] < '6' || tempPhone[0] > '9') flag = 1;
 				for(int j = 0; j < n && !flag; j++) {
-					if(!isdigit(tempPhone[j])) flag = 1;
+					if(!isdigit(tempPhone[j])) {
+                        flag = 1;
 				}
 				if(flag == 1) {
 					printf("Invalid phone number\n");
@@ -439,7 +440,7 @@ void editContact(AddressBook *addressBook)
 
 				if(flag == 1) {
 					for(int j = 0; j < n; j++) {
-						if(isupper((unsigned char)tempEmail[j])) { 
+						if(isupper(tempEmail[j])) { 
 						    flag = 0; 
 						    break; 
 						    
@@ -466,7 +467,9 @@ void editContact(AddressBook *addressBook)
 				    
 				}
 
-				if(flag == 1 && ((n - 4) - (atIdx + 1) < 1)) flag = 0;
+				if(flag == 1 && ((n - 4) - (atIdx + 1) < 1)) {
+				flag = 0;
+				}
 
 				if(flag == 0) {
 					printf("Invalid email id\n");
